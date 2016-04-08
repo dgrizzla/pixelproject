@@ -1,0 +1,41 @@
+var game = new Phaser.Game(800, 600, Phaser.AUTO, '', {
+  preload: preload,
+  create: create,
+  update: update
+});
+var aagns = ['aang', 'aang2', 'aang3'];
+var index = 0;
+
+function preload() {
+  game.load.image('aang', 'assets/aang.png');
+  game.load.image('aang2', 'assets/aang2.png');
+  game.load.image('aang3', 'assets/aang3.png');
+  game.load.image('btnleft', 'assets/left.png');
+  game.load.image('btnright', 'assets/right.png');
+}
+var aang, left, right, containerPlayer;
+
+function onLeft() {
+  if (index <= 0) {
+    index = 3;
+  }
+  index--;
+  aang.loadTexture(aagns[index]);
+}
+
+function onRight() {
+  if (index >= 2) {
+    index = -1;
+  }
+  index++;
+  aang.loadTexture(aagns[index]);
+}
+
+function create() {
+  game.stage.backgroundColor = "#4488AA";
+  aang = game.add.sprite(10, 10, aagns[index]);
+  left = game.add.button(100, 250, 'btnleft', onLeft).scale.setTo(0.8, 0.8);
+  right = game.add.button(380, 250, 'btnright', onRight).scale.setTo(0.8, 0.8);
+}
+
+function update() {}
